@@ -67,6 +67,9 @@ public class BrightnessController implements ToggleSlider.Listener {
     private final int mMinimumBacklightForVr;
     private final int mMaximumBacklightForVr;
     private final int mDefaultBacklightForVr;
+	
+	private ImageView nIcon;
+	private int mSliderValue = 0;
 
     private final Context mContext;
     private final ImageView mIcon;
@@ -264,9 +267,10 @@ public class BrightnessController implements ToggleSlider.Listener {
         }
     };
 
-    public BrightnessController(Context context, ImageView icon, ToggleSlider control) {
+    public BrightnessController(Context context, ImageView icon, ImageView icon2, ToggleSlider control) {
         mContext = context;
         mIcon = icon;
+        nIcon = icon2;
         mControl = control;
         mControl.setMax(GAMMA_SPACE_MAX);
         Dependency.initDependencies(SystemUIFactory.getInstance().getRootComponent());
@@ -359,6 +363,7 @@ public class BrightnessController implements ToggleSlider.Listener {
     @Override
     public void onChanged(ToggleSlider toggleSlider, boolean tracking, boolean automatic,
             int value, boolean stopTracking) {
+        this.mSliderValue = value;
         updateIcon(mAutomatic);
         if (mExternalChange) return;
 
@@ -433,6 +438,13 @@ public class BrightnessController implements ToggleSlider.Listener {
             mIcon.setImageResource(mAutomatic ?
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_on :
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_off);
+        }
+        if (this.mSliderValue <= mMinimumBacklight) {
+            nIcon.setImageResource(R.drawable.ic_qs_brightness_low);
+        } else if (this.mSliderValue >= mMaximumBacklight - 1) {
+            nIcon.setImageResource(R.drawable.ic_qs_brightness_high);
+        } else {
+            nIcon.setImageResource(R.drawable.ic_qs_brightness_medium);
         }
     }
 
