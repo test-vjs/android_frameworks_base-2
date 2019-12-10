@@ -440,11 +440,11 @@ public class BrightnessController implements ToggleSlider.Listener {
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_off);
         }
         if (this.mSliderValue <= mMinimumBacklight) {
-            nIcon.setImageResource(R.drawable.ic_qs_brightness_low);
-        } else if (this.mSliderValue >= mMaximumBacklight - 1) {
-            nIcon.setImageResource(R.drawable.ic_qs_brightness_high);
+            nIcon.setImageResource(com.android.systemui.R.drawable.ic_qs_brightness_low);
+        } else if (this.mSliderValue >= mMaximumBacklight) {
+            nIcon.setImageResource(com.android.systemui.R.drawable.ic_qs_brightness_high);
         } else {
-            nIcon.setImageResource(R.drawable.ic_qs_brightness_medium);
+            nIcon.setImageResource(com.android.systemui.R.drawable.ic_qs_brightness_medium);
         }
     }
 
