@@ -50,6 +50,8 @@ import com.android.systemui.SystemUIFactory;
 
 import java.util.ArrayList;
 
+import com.android.systemui.R;
+
 public class BrightnessController implements ToggleSlider.Listener {
     private static final String TAG = "StatusBar.BrightnessController";
     private static final int SLIDER_ANIMATION_DURATION = 3000;
@@ -67,8 +69,8 @@ public class BrightnessController implements ToggleSlider.Listener {
     private final int mMinimumBacklightForVr;
     private final int mMaximumBacklightForVr;
     private final int mDefaultBacklightForVr;
-	
-	private ImageView nIcon;
+
+	private final ImageView nIcon;
 	private int mSliderValue = 0;
 
     private final Context mContext;
@@ -439,10 +441,10 @@ public class BrightnessController implements ToggleSlider.Listener {
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_on :
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_off);
         }
-        if (this.mSliderValue <= mMinimumBacklight) {
-            nIcon.setImageResource(com.android.systemui.R.drawable.ic_qs_brightness_low);
-        } else if (this.mSliderValue >= mMaximumBacklight) {
-            nIcon.setImageResource(com.android.systemui.R.drawable.ic_qs_brightness_high);
+        if (this.mSliderValue <= this.mMinimumBacklight) {
+            nIcon.setImageResource(R.drawable.ic_qs_brightness_low);
+        } else if (this.mSliderValue >= this.mMaximumBacklight - 1) {
+            nIcon.setImageResource(R.drawable.ic_qs_brightness_high);
         } else {
             nIcon.setImageResource(com.android.systemui.R.drawable.ic_qs_brightness_medium);
         }
